@@ -19,11 +19,10 @@ def detail(request, question_id):
     # Renderiza la plantilla 'detail.html' con los datos de la pregunta
     return render(request, "polls/detail.html", {"question": question})
 
-def results(request, question_id):
-    # Muestra un mensaje simple con el ID de la pregunta (esto se puede mejorar)
-    response = "Estás viendo los resultados de la pregunta %s."
-    return HttpResponse(response % question_id)
 
+def results(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, "polls/results.html", {"question": question})
 def vote(request, question_id):
     # Intenta obtener la pregunta correspondiente al ID
     question = get_object_or_404(Question, pk=question_id)
